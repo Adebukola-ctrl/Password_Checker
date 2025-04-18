@@ -28,3 +28,33 @@ def check_password_strength(password):
         strength = "Medium"
     else:
         strength = "Weak"
+        
+    # Feedback for what’s missing
+    feedback = []
+
+    if not has_min_length(password):
+        feedback.append("Password should be at least 8 characters long.")
+    if not has_lowercase(password):
+        feedback.append("Password should include at least one lowercase.")
+    if not has_uppercase(password):
+        feedback.append("Password should include at least one uppercase.")
+    if not has_digit(password):
+        feedback.append("Password should include at least one digit.")
+    if not has_special_char(password):
+        feedback.append("Password should include at least one special character (!@#$%^&*).")
+
+    return strength, feedback
+
+def main():
+    password = input("Enter your password: ")
+    strength, feedback = check_password_strength(password)
+
+    print("\nPassword Strength:", strength)
+    if strength != "Strong":
+        print("\nSuggestions to improve your password:")
+        for i in feedback:
+            print(i)
+
+
+if __name__ == "__main__":
+    main()
